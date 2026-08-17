@@ -21,7 +21,7 @@
     {
       "binding": "DB",
       "database_name": "wingoeats-db",
-      "database_id": "REPLACE-WITH-YOUR-DATABASE-ID"
+      "database_id": "1e11f352-041a-4b31-bf3b-49fc04a29801"
     }
   ]
 }
