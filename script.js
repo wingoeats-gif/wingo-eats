@@ -63,4 +63,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Custom logo (optional) ----------
+     If /assets/logo.png exists, it replaces the "W" mark everywhere on the
+     page automatically. If it doesn't exist yet, the default "W" mark stays
+     — nothing breaks. To set your logo: upload a file to /assets/logo.png
+     in your GitHub repo. No other changes needed. */
+  applyCustomLogo();
 });
+
+function applyCustomLogo() {
+  var marks = document.querySelectorAll('.brand-mark');
+  if (!marks.length) return;
+  var probe = new Image();
+  probe.onload = function () {
+    marks.forEach(function (el) {
+      el.innerHTML = '<img src="/assets/logo.png" alt="Wingo Eats logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">';
+    });
+  };
+  probe.src = '/assets/logo.png';
+}
