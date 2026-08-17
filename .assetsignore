@@ -1,0 +1,11 @@
+worker/
+functions/
+wrangler.jsonc
+package.json
+package-lock.json
+bun.lock
+node_modules/
+schema.sql
+README.md
+.git/
+.gitignore
