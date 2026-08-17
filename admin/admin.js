@@ -460,7 +460,23 @@ function initMenuPage() {
   }
 }
 
+/* ---------- Custom logo (optional) ----------
+   Same mechanism as the public site's script.js: if /assets/logo.png
+   exists, it replaces the "W" mark in the admin header automatically. */
+function applyCustomLogo() {
+  var marks = document.querySelectorAll('.brand-mark');
+  if (!marks.length) return;
+  var probe = new Image();
+  probe.onload = function () {
+    marks.forEach(function (el) {
+      el.innerHTML = '<img src="/assets/logo.png" alt="Wingo Eats logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">';
+    });
+  };
+  probe.src = '/assets/logo.png';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  applyCustomLogo();
   initAuthPage();
   initDashboard();
   initMenuPage();
