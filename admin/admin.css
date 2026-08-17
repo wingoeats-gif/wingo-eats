@@ -1,0 +1,112 @@
+/* ==========================================================================
+   WINGO EATS — Admin panel styles (loaded alongside ../style.css)
+   ========================================================================== */
+
+body.admin-body{background:var(--paper);min-height:100vh;}
+
+/* ---------- Auth screen (login / first-time setup) ---------- */
+.auth-wrap{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.auth-card{
+  width:100%;max-width:400px;background:var(--white);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);padding:40px 32px;border:1px solid var(--line);
+}
+.auth-card .brand{justify-content:center;margin-bottom:6px;}
+.auth-card .brand-sub{text-align:center;color:var(--ink-40);font-size:13.5px;margin-bottom:28px;}
+.form-field{margin-bottom:18px;}
+.form-field label{display:block;font-weight:700;font-family:var(--font-display);font-size:13px;margin-bottom:7px;}
+.form-field input,.form-field textarea,.form-field select{
+  width:100%;border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;
+  font-size:14.5px;font-family:var(--font-body);transition:border-color .15s;background:var(--white);
+}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{outline:none;border-color:var(--blue);}
+.form-field textarea{resize:vertical;min-height:70px;}
+.form-hint{font-size:12px;color:var(--ink-40);margin-top:6px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-check{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;}
+.form-check input{width:auto;}
+.alert{
+  padding:12px 14px;border-radius:var(--radius-sm);font-size:13.5px;margin-bottom:18px;font-weight:600;
+}
+.alert-error{background:#FDE8E8;color:#B42318;}
+.alert-success{background:#E7F6EC;color:#1E7A34;}
+
+/* ---------- Admin top bar ---------- */
+.admin-topbar{
+  background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;
+}
+.admin-topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
+.admin-user{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-60);}
+.admin-user strong{color:var(--dark);}
+
+/* ---------- Layout ---------- */
+.admin-main{max-width:1180px;margin:0 auto;padding:32px 20px 80px;}
+.admin-header-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px;}
+.admin-header-row h1{font-size:24px;}
+.breadcrumb{font-size:13.5px;color:var(--ink-40);margin-bottom:6px;}
+.breadcrumb a{color:var(--blue);font-weight:600;}
+
+/* ---------- Panel / form card ---------- */
+.panel{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:26px;margin-bottom:26px;
+}
+.panel-title{font-size:16.5px;margin-bottom:18px;}
+
+/* ---------- Image upload control ---------- */
+.image-upload{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.image-preview{
+  width:84px;height:84px;border-radius:var(--radius-md);background:var(--paper);border:1.5px dashed var(--line);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;color:var(--ink-40);font-size:12px;text-align:center;
+}
+.image-preview img{width:100%;height:100%;object-fit:cover;}
+.upload-btn-row{display:flex;flex-direction:column;gap:6px;}
+.upload-status{font-size:12px;color:var(--ink-40);}
+.upload-status.uploading{color:var(--blue);}
+.upload-status.error{color:#B42318;}
+
+/* ---------- List rows (restaurants / dishes) ---------- */
+.admin-list{display:flex;flex-direction:column;gap:12px;}
+.admin-row{
+  display:flex;align-items:center;gap:16px;background:var(--white);border:1px solid var(--line);
+  border-radius:var(--radius-md);padding:14px 16px;flex-wrap:wrap;
+}
+.admin-row-thumb{
+  width:52px;height:52px;border-radius:12px;background:var(--paper);flex-shrink:0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--blue);
+}
+.admin-row-thumb img{width:100%;height:100%;object-fit:cover;}
+.admin-row-info{flex:1;min-width:160px;}
+.admin-row-info h4{font-size:15px;margin-bottom:3px;}
+.admin-row-info p{font-size:12.5px;color:var(--ink-40);}
+.admin-row-price{font-family:var(--font-display);font-weight:800;color:var(--blue);font-size:15px;}
+.admin-row-actions{display:flex;gap:8px;}
+.icon-btn{
+  width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--white);
+  display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s;
+}
+.icon-btn:hover{background:var(--paper);}
+.icon-btn.danger:hover{background:#FDE8E8;border-color:#F3B8B8;}
+.badge-veg{width:14px;height:14px;border:2px solid var(--veg);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;}
+.badge-veg::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--veg);}
+.badge-veg.nonveg{border-color:var(--nonveg);}
+.badge-veg.nonveg::after{background:var(--nonveg);}
+.badge-fire{font-size:11px;background:var(--dark);color:#fff;padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px;}
+
+.category-block{margin-bottom:8px;}
+.category-block h3{
+  font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-40);
+  font-family:var(--font-display);margin:22px 0 10px;
+}
+
+.empty-admin{text-align:center;padding:50px 20px;color:var(--ink-40);}
+.empty-admin .emoji{font-size:34px;margin-bottom:10px;}
+
+@media (max-width:640px){
+  .form-row{grid-template-columns:1fr;}
+  .admin-row{flex-direction:column;align-items:stretch;text-align:left;}
+  .admin-row-actions{justify-content:flex-end;}
+}

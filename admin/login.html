@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login | Wingo Eats</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<div class="auth-wrap">
+  <div class="auth-card" id="authCard">
+    <div class="brand"><span class="brand-mark">W</span>Wingo<span>Eats</span></div>
+    <p class="brand-sub" id="authSubtitle">Log in to manage your restaurants and menus.</p>
+
+    <div id="authAlert"></div>
+
+    <form id="authForm">
+      <h2 id="authTitle" style="font-size:18px;margin-bottom:18px;">Admin Login</h2>
+
+      <div class="form-field">
+        <label for="authUsername">Username</label>
+        <input type="text" id="authUsername" autocomplete="username" required>
+      </div>
+      <div class="form-field">
+        <label for="authPassword">Password</label>
+        <input type="password" id="authPassword" autocomplete="current-password" required minlength="8">
+      </div>
+      <div class="form-field" id="confirmField" style="display:none;">
+        <label for="authConfirm">Confirm Password</label>
+        <input type="password" id="authConfirm" autocomplete="new-password" minlength="8">
+        <p class="form-hint">Use at least 8 characters. You'll use this to log in every time, so keep it somewhere safe.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="authSubmit">Log In</button>
+    </form>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

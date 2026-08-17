@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wingo-eats",
+  "compatibility_date": "2026-08-01",
+  "main": "worker/index.js",
+
+  // Static files (index.html, style.css, /admin/*, etc.) are served directly
+  // from the repository. Only requests matching run_worker_first are passed
+  // to worker/index.js — everything else is served as a plain file.
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Connects this Worker to your D1 database. Replace database_id below with
+  // the ID shown on your wingoeats-db page in the Cloudflare dashboard
+  // (Workers & Pages → D1 SQL Database → wingoeats-db → Database ID).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "wingoeats-db",
+      "database_id": "REPLACE-WITH-YOUR-DATABASE-ID"
+    }
+  ]
+}

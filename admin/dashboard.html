@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurants | Wingo Eats Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-topbar">
+  <div class="admin-topbar-inner">
+    <a href="dashboard.html" class="brand"><span class="brand-mark">W</span>Wingo<span>Eats</span> <span style="color:var(--ink-40);font-size:13px;font-weight:600;margin-left:4px;">Admin</span></a>
+    <div class="admin-user">
+      Logged in as <strong id="adminUsername">…</strong>
+      <a href="../index.html" class="btn btn-outline btn-sm" target="_blank">🌐 View Site</a>
+      <button class="btn btn-outline btn-sm" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+</div>
+
+<main class="admin-main">
+  <div class="admin-header-row">
+    <div>
+      <h1>Restaurants</h1>
+      <p class="form-hint">Add restaurants here, then manage each one's menu.</p>
+    </div>
+    <button class="btn btn-primary" id="addRestaurantBtn">+ Add Restaurant</button>
+  </div>
+
+  <!-- Add/Edit form (hidden until needed) -->
+  <div class="panel" id="restaurantFormPanel" style="display:none;">
+    <h2 class="panel-title" id="restaurantFormTitle">Add Restaurant</h2>
+    <div id="restaurantAlert"></div>
+    <form id="restaurantForm">
+      <input type="hidden" id="rf_id">
+      <input type="hidden" id="rf_logoImageId">
+      <input type="hidden" id="rf_bannerImageId">
+
+      <div class="form-field">
+        <label for="rf_name">Restaurant Name *</label>
+        <input type="text" id="rf_name" required placeholder="e.g. Burger Bay">
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="rf_cuisine">Cuisine</label>
+          <input type="text" id="rf_cuisine" placeholder="e.g. American, Burgers">
+        </div>
+        <div class="form-field">
+          <label for="rf_rating">Rating</label>
+          <input type="number" id="rf_rating" step="0.1" min="0" max="5" placeholder="4.5">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="rf_distance">Distance</label>
+          <input type="text" id="rf_distance" placeholder="e.g. 1.2 km">
+        </div>
+        <div class="form-field">
+          <label for="rf_prepTime">Prep Time</label>
+          <input type="text" id="rf_prepTime" placeholder="e.g. 20–25 min">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="rf_priceForTwo">Price for Two</label>
+          <input type="text" id="rf_priceForTwo" placeholder="e.g. 300">
+        </div>
+        <div class="form-field">
+          <label for="rf_phone">Phone Number</label>
+          <input type="text" id="rf_phone" placeholder="e.g. +911234567890">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="rf_address">Address</label>
+        <textarea id="rf_address" placeholder="Used for the 'Get Directions' button"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label>Logo Image</label>
+        <div class="image-upload">
+          <div class="image-preview" id="logoPreview">Logo</div>
+          <div class="upload-btn-row">
+            <input type="file" id="logoInput" accept="image/png,image/jpeg,image/webp,image/gif">
+            <span class="upload-status" id="logoStatus"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Banner Image</label>
+        <div class="image-upload">
+          <div class="image-preview" id="bannerPreview">Banner</div>
+          <div class="upload-btn-row">
+            <input type="file" id="bannerInput" accept="image/png,image/jpeg,image/webp,image/gif">
+            <span class="upload-status" id="bannerStatus"></span>
+          </div>
+        </div>
+        <p class="form-hint">Images should be under 1.5MB. JPG, PNG, WEBP or GIF.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:6px;">
+        <button type="submit" class="btn btn-primary">Save Restaurant</button>
+        <button type="button" class="btn btn-outline" id="cancelRestaurantBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-list" id="restaurantList"></div>
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

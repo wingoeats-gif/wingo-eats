@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Menu | Wingo Eats Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-topbar">
+  <div class="admin-topbar-inner">
+    <a href="dashboard.html" class="brand"><span class="brand-mark">W</span>Wingo<span>Eats</span> <span style="color:var(--ink-40);font-size:13px;font-weight:600;margin-left:4px;">Admin</span></a>
+    <div class="admin-user">
+      Logged in as <strong id="adminUsername">…</strong>
+      <a href="../index.html" class="btn btn-outline btn-sm" target="_blank">🌐 View Site</a>
+      <button class="btn btn-outline btn-sm" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+</div>
+
+<main class="admin-main">
+  <div class="breadcrumb"><a href="dashboard.html">← Back to Restaurants</a></div>
+  <div class="admin-header-row">
+    <div>
+      <h1>Menu — <span id="menuRestaurantName">…</span></h1>
+      <p class="form-hint">Add dishes grouped by category (e.g. Burgers, Pizza, Shakes). Categories become the tabs shoppers see on the restaurant page.</p>
+    </div>
+    <button class="btn btn-primary" id="addDishBtn">+ Add Dish</button>
+  </div>
+
+  <!-- Add/Edit dish form (hidden until needed) -->
+  <div class="panel" id="dishFormPanel" style="display:none;">
+    <h2 class="panel-title" id="dishFormTitle">Add Dish</h2>
+    <div id="dishAlert"></div>
+    <form id="dishForm">
+      <input type="hidden" id="df_id">
+      <input type="hidden" id="df_imageId">
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="df_category">Category *</label>
+          <input type="text" id="df_category" required placeholder="e.g. Burgers">
+        </div>
+        <div class="form-field">
+          <label for="df_price">Price (₹) *</label>
+          <input type="number" id="df_price" step="1" min="0" required placeholder="e.g. 189">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="df_name">Dish Name *</label>
+        <input type="text" id="df_name" required placeholder="e.g. Classic Wingo Burger">
+      </div>
+
+      <div class="form-field">
+        <label for="df_description">Description</label>
+        <textarea id="df_description" placeholder="Short, appetising description shown under the dish name"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field form-check">
+          <input type="checkbox" id="df_isVeg" checked>
+          <label for="df_isVeg" style="margin:0;">Vegetarian</label>
+        </div>
+        <div class="form-field form-check">
+          <input type="checkbox" id="df_isBestseller">
+          <label for="df_isBestseller" style="margin:0;">Mark as Bestseller 🔥</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Dish Photo</label>
+        <div class="image-upload">
+          <div class="image-preview" id="dishPreview">Photo</div>
+          <div class="upload-btn-row">
+            <input type="file" id="dishImageInput" accept="image/png,image/jpeg,image/webp,image/gif">
+            <span class="upload-status" id="dishStatus"></span>
+          </div>
+        </div>
+        <p class="form-hint">Images should be under 1.5MB. JPG, PNG, WEBP or GIF.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:6px;">
+        <button type="submit" class="btn btn-primary">Save Dish</button>
+        <button type="button" class="btn btn-outline" id="cancelDishBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-list" id="dishList"></div>
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

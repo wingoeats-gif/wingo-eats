@@ -1,0 +1,66 @@
+/* ==========================================================================
+   WINGO EATS — script.js
+   Shared UI chrome used on every page: mobile nav toggle, on-scroll reveal
+   for static sections, and header shadow on scroll.
+   Live data fetching/rendering (restaurants, menus, search) lives in app.js.
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ---------- Mobile nav toggle ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        navLinks.style.display = 'flex';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '64px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = '#FFFFFF';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.padding = '18px 24px';
+        navLinks.style.gap = '16px';
+        navLinks.style.borderBottom = '1px solid #E9E4D8';
+        navLinks.style.boxShadow = '0 12px 24px rgba(17,17,17,0.08)';
+      } else {
+        navLinks.style.display = '';
+      }
+    });
+
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        navLinks.style.display = '';
+      });
+    });
+  }
+
+  /* ---------- Scroll reveal (for any static section using .reveal without .in) ---------- */
+  var revealEls = document.querySelectorAll('.reveal:not(.in)');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var revealObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- Header shadow on scroll ---------- */
+  var header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', function () {
+      header.style.boxShadow = window.scrollY > 8 ? '0 4px 16px rgba(17,17,17,0.07)' : 'none';
+    });
+  }
+
+});
