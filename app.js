@@ -4,6 +4,8 @@
    (Admin editing lives separately in /admin/admin.js)
    ========================================================================== */
 
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.wingoeats.userapp&pcampaignid=web_share';
+
 const CATEGORY_EMOJI = {
   burger: '🍔', burgers: '🍔', pizza: '🍕', chicken: '🍗', 'fried chicken': '🍗',
   beverage: '🥤', beverages: '🥤', meal: '🍛', meals: '🍛', dessert: '🍨', desserts: '🍨',
@@ -119,12 +121,18 @@ function initHomepage() {
 function dishCardHtml(d) {
   var thumb = d.image_id
     ? '<img class="img-cover" src="/api/image/' + d.image_id + '" alt="' + escapeHtml(d.name) + '">'
-    : emojiFor(d.category);
+    : emojiFor(d.subcategory || d.category);
   return (
     '<div class="ticket menu-card reveal in">' +
       '<div class="thumb ph-block food">' + thumb + (d.is_bestseller ? '<span class="badge-best">🔥 Bestseller</span>' : '') + '</div>' +
       '<div class="ticket-body">' +
-        '<div class="menu-card-top"><div><h4>' + escapeHtml(d.name) + '</h4></div><span class="veg-dot' + (d.is_veg ? '' : ' nonveg') + '"></span></div>' +
+        '<div class="menu-card-top">' +
+          '<div><h4>' + escapeHtml(d.name) + '</h4></div>' +
+          '<div class="menu-card-actions">' +
+            '<span class="veg-dot' + (d.is_veg ? '' : ' nonveg') + '"></span>' +
+            '<a class="menu-order-btn" href="' + PLAY_STORE_URL + '">🛒 Order</a>' +
+          '</div>' +
+        '</div>' +
         (d.description ? '<p class="desc">' + escapeHtml(d.description) + '</p>' : '') +
         '<span class="price">₹' + (d.price % 1 === 0 ? d.price : d.price.toFixed(2)) + '</span>' +
       '</div>' +
@@ -133,13 +141,22 @@ function dishCardHtml(d) {
 }
 
 function groupDishesByCategory(dishes) {
-  var order = [];
-  var groups = {};
+  var catOrder = [];
+  var catMap = {};
   dishes.forEach(function (d) {
-    if (!groups[d.category]) { groups[d.category] = []; order.push(d.category); }
-    groups[d.category].push(d);
+    if (!catMap[d.category]) { catMap[d.category] = { order: [], map: {} }; catOrder.push(d.category); }
+    var bucket = catMap[d.category];
+    var sub = (d.subcategory || '').trim();
+    if (!bucket.map[sub]) { bucket.map[sub] = []; bucket.order.push(sub); }
+    bucket.map[sub].push(d);
   });
-  return order.map(function (cat) { return { category: cat, items: groups[cat] }; });
+  return catOrder.map(function (cat) {
+    var bucket = catMap[cat];
+    return {
+      category: cat,
+      subgroups: bucket.order.map(function (sub) { return { subcategory: sub, items: bucket.map[sub] }; })
+    };
+  });
 }
 
 function slugify(str) {
@@ -211,10 +228,14 @@ function renderRestaurant(r, dishes) {
   }).join('');
 
   menuRoot.innerHTML = groups.map(function (g) {
+    var subHtml = g.subgroups.map(function (sg) {
+      var heading = sg.subcategory ? '<h3 class="submenu-heading">' + escapeHtml(sg.subcategory) + '</h3>' : '';
+      return heading + '<div class="menu-grid">' + sg.items.map(dishCardHtml).join('') + '</div>';
+    }).join('');
     return (
       '<div class="menu-group" id="' + slugify(g.category) + '">' +
         '<h2>' + emojiFor(g.category) + ' ' + escapeHtml(g.category) + '</h2>' +
-        '<div class="menu-grid">' + g.items.map(dishCardHtml).join('') + '</div>' +
+        subHtml +
       '</div>'
     );
   }).join('');
