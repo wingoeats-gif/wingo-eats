@@ -69,7 +69,20 @@ document.addEventListener('DOMContentLoaded', function () {
      — nothing breaks. To set your logo: upload a file to /assets/logo.png
      in your GitHub repo. No other changes needed. */
   applyCustomLogo();
+  applyHeroImage();
 });
+
+function applyHeroImage() {
+  var el = document.querySelector('.hero-ticket .ph');
+  if (!el) return; // only present on the homepage hero
+  var probe = new Image();
+  probe.onload = function () {
+    el.style.backgroundImage = 'url(/assets/hero-food.jpg)';
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
+  };
+  probe.src = '/assets/hero-food.jpg';
+}
 
 function applyCustomLogo() {
   var marks = document.querySelectorAll('.brand-mark');
