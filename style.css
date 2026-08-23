@@ -405,11 +405,19 @@ h1,h2,h3,h4{font-family:var(--font-display);color:var(--dark);line-height:1.12;l
 .menu-section{padding:44px 0 10px;}
 .menu-group{margin-bottom:44px;scroll-margin-top:130px;}
 .menu-group h2{font-size:22px;margin-bottom:20px;padding-left:2px;border-left:5px solid var(--yellow);padding-left:14px;}
+.submenu-heading{font-size:14px;font-weight:700;color:var(--ink-60);font-family:var(--font-display);margin:18px 2px 10px;text-transform:uppercase;letter-spacing:0.04em;}
 .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 
 .menu-card{display:flex;gap:0;}
 .menu-card .ticket-body{flex:1;padding:16px;display:flex;flex-direction:column;}
-.menu-card-top{display:flex;justify-content:space-between;gap:10px;}
+.menu-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;}
+.menu-card-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;}
+.menu-order-btn{
+  display:inline-flex;align-items:center;gap:4px;white-space:nowrap;
+  background:var(--blue);color:var(--white);font-family:var(--font-display);font-weight:700;
+  font-size:11px;padding:5px 10px;border-radius:999px;transition:transform .15s ease, background .15s ease;
+}
+.menu-order-btn:hover{background:var(--blue-deep);transform:translateY(-1px);}
 .veg-dot{width:16px;height:16px;border:2px solid var(--veg);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;}
 .veg-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--veg);}
 .veg-dot.nonveg{border-color:var(--nonveg);}
