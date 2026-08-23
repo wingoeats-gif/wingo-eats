@@ -124,7 +124,7 @@ export default {
         const restaurant = await env.DB.prepare('SELECT * FROM restaurants WHERE id = ?').bind(m.id).first();
         if (!restaurant) return json({ error: 'Restaurant not found.' }, 404);
         const { results: dishes } = await env.DB.prepare(
-          'SELECT * FROM dishes WHERE restaurant_id = ? ORDER BY category ASC, sort_order ASC, id ASC'
+          'SELECT * FROM dishes WHERE restaurant_id = ? ORDER BY category ASC, subcategory ASC, sort_order ASC, id ASC'
         ).bind(m.id).all();
         return json({ restaurant, dishes });
       }
@@ -163,10 +163,10 @@ export default {
         if (!name) return json({ error: 'Dish name is required.' }, 400);
         if (!restaurantId) return json({ error: 'restaurantId is required.' }, 400);
         const result = await env.DB.prepare(
-          `INSERT INTO dishes (restaurant_id, category, name, description, price, is_veg, is_bestseller, image_id, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+          `INSERT INTO dishes (restaurant_id, category, subcategory, name, description, price, is_veg, is_bestseller, image_id, sort_order)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(
-          restaurantId, (body.category || 'Menu').trim(), name, body.description || '', body.price != null ? body.price : 0,
+          restaurantId, (body.category || 'Menu').trim(), (body.subcategory || '').trim(), name, body.description || '', body.price != null ? body.price : 0,
           body.isVeg ? 1 : 0, body.isBestseller ? 1 : 0, body.imageId || null, body.sortOrder || 0
         ).run();
         return json({ success: true, id: result.meta.last_row_id });
@@ -182,10 +182,10 @@ export default {
         const name = (body.name || '').trim();
         if (!name) return json({ error: 'Dish name is required.' }, 400);
         await env.DB.prepare(
-          `UPDATE dishes SET category = ?, name = ?, description = ?, price = ?, is_veg = ?, is_bestseller = ?,
+          `UPDATE dishes SET category = ?, subcategory = ?, name = ?, description = ?, price = ?, is_veg = ?, is_bestseller = ?,
            image_id = ?, sort_order = ? WHERE id = ?`
         ).bind(
-          (body.category || 'Menu').trim(), name, body.description || '', body.price != null ? body.price : 0,
+          (body.category || 'Menu').trim(), (body.subcategory || '').trim(), name, body.description || '', body.price != null ? body.price : 0,
           body.isVeg ? 1 : 0, body.isBestseller ? 1 : 0, body.imageId || null, body.sortOrder || 0, m.id
         ).run();
         return json({ success: true });
