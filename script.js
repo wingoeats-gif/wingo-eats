@@ -70,7 +70,20 @@ document.addEventListener('DOMContentLoaded', function () {
      in your GitHub repo. No other changes needed. */
   applyCustomLogo();
   applyHeroImage();
+  applyAppScreenshot();
 });
+
+function applyAppScreenshot() {
+  var el = document.querySelector('.phone-mock .card');
+  if (!el) return; // only present on the homepage download section
+  var probe = new Image();
+  probe.onload = function () {
+    el.style.backgroundImage = 'url(/assets/app-screenshot.png)';
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'top center';
+  };
+  probe.src = '/assets/app-screenshot.png';
+}
 
 function applyHeroImage() {
   var el = document.querySelector('.hero-ticket .ph');
