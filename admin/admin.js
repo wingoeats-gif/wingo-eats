@@ -337,6 +337,7 @@ function initMenuPage() {
       panelTitle.textContent = 'Edit Dish';
       idField.value = dish.id;
       document.getElementById('df_category').value = dish.category || '';
+      document.getElementById('df_subcategory').value = dish.subcategory || '';
       document.getElementById('df_name').value = dish.name || '';
       document.getElementById('df_description').value = dish.description || '';
       document.getElementById('df_price').value = dish.price != null ? dish.price : '';
@@ -373,6 +374,7 @@ function initMenuPage() {
     var payload = {
       restaurantId: restaurantId,
       category: document.getElementById('df_category').value.trim() || 'Menu',
+      subcategory: document.getElementById('df_subcategory').value.trim(),
       name: document.getElementById('df_name').value.trim(),
       description: document.getElementById('df_description').value.trim(),
       price: parseFloat(document.getElementById('df_price').value) || 0,
@@ -425,7 +427,7 @@ function initMenuPage() {
             return (
               '<div class="admin-row" data-id="' + d.id + '">' +
                 '<div class="admin-row-thumb">' + thumb + '</div>' +
-                '<div class="admin-row-info"><h4><span class="badge-veg' + (d.is_veg ? '' : ' nonveg') + '"></span> ' + escapeHtml(d.name) + (d.is_bestseller ? '<span class="badge-fire">🔥 Bestseller</span>' : '') + '</h4><p>' + escapeHtml(d.description || '') + '</p></div>' +
+                '<div class="admin-row-info"><h4><span class="badge-veg' + (d.is_veg ? '' : ' nonveg') + '"></span> ' + escapeHtml(d.name) + (d.subcategory ? '<span class="badge-subcat">' + escapeHtml(d.subcategory) + '</span>' : '') + (d.is_bestseller ? '<span class="badge-fire">🔥 Bestseller</span>' : '') + '</h4><p>' + escapeHtml(d.description || '') + '</p></div>' +
                 '<div class="admin-row-price">₹' + d.price + '</div>' +
                 '<div class="admin-row-actions">' +
                   '<button class="icon-btn edit-dish-btn" title="Edit">✏️</button>' +
