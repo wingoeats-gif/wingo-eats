@@ -126,15 +126,15 @@ function dishCardHtml(d) {
     '<div class="ticket menu-card reveal in">' +
       '<div class="thumb ph-block food">' + thumb + (d.is_bestseller ? '<span class="badge-best">🔥 Bestseller</span>' : '') + '</div>' +
       '<div class="ticket-body">' +
-        '<div class="menu-card-top">' +
+       '<div class="menu-card-top">' +
           '<div><h4>' + escapeHtml(d.name) + '</h4></div>' +
-          '<div class="menu-card-actions">' +
-            '<span class="veg-dot' + (d.is_veg ? '' : ' nonveg') + '"></span>' +
-            '<a class="menu-order-btn" href="' + PLAY_STORE_URL + '">🛒 Order</a>' +
-          '</div>' +
+          '<span class="veg-dot' + (d.is_veg ? '' : ' nonveg') + '"></span>' +
         '</div>' +
         (d.description ? '<p class="desc">' + escapeHtml(d.description) + '</p>' : '') +
-        '<span class="price">₹' + (d.price % 1 === 0 ? d.price : d.price.toFixed(2)) + '</span>' +
+        '<div class="menu-card-bottom">' +
+          '<span class="price">₹' + (d.price % 1 === 0 ? d.price : d.price.toFixed(2)) + '</span>' +
+          '<a class="menu-order-btn" href="' + PLAY_STORE_URL + '">🛒 Order</a>' +
+        '</div>' +
       '</div>' +
     '</div>'
   );
