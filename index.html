@@ -1,10 +1,3 @@
-// ==========================================================================
-// WINGO EATS — worker/index.js
-// Single Cloudflare Worker entry point. Static files (index.html, style.css,
-// /admin/*, etc.) are served automatically by the "assets" binding — this
-// script only runs for /api/* requests (see wrangler.jsonc: run_worker_first).
-// ==========================================================================
-
 import {
   hashPassword, verifyPassword, getCookie, sessionCookieHeader, clearCookieHeader,
   SESSION_TTL_SECONDS, createSession, getAdminFromRequest, json, requireAdmin
