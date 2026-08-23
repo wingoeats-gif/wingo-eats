@@ -95,6 +95,7 @@ body.admin-body{background:var(--paper);min-height:100vh;}
 .badge-veg.nonveg{border-color:var(--nonveg);}
 .badge-veg.nonveg::after{background:var(--nonveg);}
 .badge-fire{font-size:11px;background:var(--dark);color:#fff;padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px;}
+.badge-subcat{font-size:11px;background:var(--blue-pale);color:var(--blue);padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px;}
 
 .category-block{margin-bottom:8px;}
 .category-block h3{
